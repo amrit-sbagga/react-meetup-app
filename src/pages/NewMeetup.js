@@ -1,10 +1,23 @@
 import React from 'react'
-import NewMeetupForm from '../components/meetups/NewMeetupForm'
+import NewMeetupForm from '../components/meetups/NewMeetupForm';
+import { useHistory } from 'react-router-dom';
 
 export default function NewMeetup() {
+    const history = useHistory();
 
     function addMeetupHandler(meetupData){
-        fetch('https://react-meetup-app-3f16e-default-rtdb.firebaseio.com/')
+        fetch(
+            'https://react-meetup-app-3f16e-default-rtdb.firebaseio.com/meetups.json',
+            {
+                method : 'POST',
+                body : JSON.stringify(meetupData),
+                headers : {
+                    'Content-Type' : 'application/json'
+                }
+            }
+        ).then(() => {
+            history.replace('/');
+        });
     }
     
     return (
