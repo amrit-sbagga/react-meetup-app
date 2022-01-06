@@ -22,6 +22,8 @@ import MeetupList from '../components/meetups/MeetupList';
 //     },
 // ];
 
+const MEETUPS_URL = process.env.REACT_APP_MEETUPS_URL;
+
 export default function AllMeetups() {
 
     const [ isLoading, setIsLoading ] = useState(true);
@@ -30,7 +32,7 @@ export default function AllMeetups() {
     useEffect(() => {
         setIsLoading(true);
         fetch(
-          'https://react-meetup-app-3f16e-default-rtdb.firebaseio.com/meetups.json'
+          MEETUPS_URL + '/meetups.json'
         ).then(response => {
             return response.json();
         }).then(data => {
